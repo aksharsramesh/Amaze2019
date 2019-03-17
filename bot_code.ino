@@ -1,16 +1,16 @@
-int i; 
+int i, high = 128, low = 0; 
 
-const int irPins[8] = {12,11,10,9,8,7,6,5};
+const int irPins[8] = {21,20,19,18,17,16,15,14};
 
 int irSensors = B00000000;
 
 //for motor
-const byte in1p=14; //motor pins
-const byte in1n=15;
-const byte in2p=16;
-const byte in2n=17;
-const byte enable=18;  //pwm pin
-int pwm=50;
+const byte in1p=12;
+const byte in1n=11;
+const byte in2p=10;
+const byte in2n=8;
+const byte enable=9;
+int pwm = 50;
 
 
 void setup() {
@@ -24,9 +24,12 @@ void setup() {
   pinMode(in2p,OUTPUT);
   pinMode(in1n,OUTPUT);
   pinMode(in2n,OUTPUT);
+
+  
 }
 
 void loop() {
+  analogWrite(enable, pwm);
   scanD();
   check();
 }
@@ -55,38 +58,38 @@ void check(){
 
 void forward()
 {
-  digitalWrite(in1p,HIGH);
-  digitalWrite(in2p,HIGH);
-  digitalWrite(in1n,LOW);
-  digitalWrite(in2n,LOW);
+  analogWrite(in1p, high);
+  analogWrite(in2p,high);
+  analogWrite(in1n,low);
+  analogWrite(in2n,low);
 }
 void back()
 {
-  digitalWrite(in1p,LOW);
-  digitalWrite(in1n,HIGH);
-  digitalWrite(in2p,LOW);
-  digitalWrite(in2n,HIGH);  
+  analogWrite(in1p,low);
+  analogWrite(in1n,high);
+  analogWrite(in2p,low);
+  analogWrite(in2n,high);  
 }
 void right()
 {
-  digitalWrite(in1p,LOW);
-  digitalWrite(in1n,LOW);
-  digitalWrite(in2p,HIGH);
-  digitalWrite(in2n,LOW); 
+  analogWrite(in1p,low);
+  analogWrite(in1n,low);
+  analogWrite(in2p,high);
+  analogWrite(in2n,low); 
 }
 void left()
 {
-  digitalWrite(in1p,HIGH);
-  digitalWrite(in1n,LOW);
-  digitalWrite(in2p,LOW);
-  digitalWrite(in2n,LOW); 
+  analogWrite(in1p,high);
+  analogWrite(in1n,low);
+  analogWrite(in2p,low);
+  analogWrite(in2n,low); 
 }
 void halt()
 {
-  digitalWrite(in1p,LOW);
-  digitalWrite(in1n,LOW);
-  digitalWrite(in2p,LOW);
-  digitalWrite(in2n,LOW); 
+  analogWrite(in1p,low);
+  analogWrite(in1n,low);
+  analogWrite(in2p,low);
+  analogWrite(in2n,low); 
 }
 
 
